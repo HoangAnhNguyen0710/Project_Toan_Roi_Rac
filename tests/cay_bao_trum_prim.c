@@ -15,6 +15,7 @@ int main(){
         addEdge_Vertex_WD(g, id1, id2, weight);
     }
     printf("Cay bao trum co trong so la : %.0lf\n", Prim_Algorithm(g, 0, n, out));
+    printToGraphViz(out, n, m);
     fclose(fptr);
    
 

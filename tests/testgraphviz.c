@@ -4,16 +4,16 @@ int random(int minN, int maxN){
     return minN + rand() % (maxN + 1 - minN);
 }
 int main(){
-    FILE* fptr = fopen("testcase3.txt","r");
+    FILE* fptr = fopen("testcasetomau.txt","r");
     FILE* output = fopen("output.dot", "w+");
     //FILE* fptr1 = fopen("testcase3.txt","w+");
     int n, m;
     int ran[1000][1000];
     int id1, id2, weight;
-    fscanf(fptr, "%d \n", &n );
+    fscanf(fptr, "%d %d\n", &n ,&m);
     fprintf(output, "graph dothi\n {");
-    for(int i = 0; i< n; i++){
-        fscanf(fptr, "%d %d %d\n", &id1, &id2, &weight);
+    for(int i = 0; i< m; i++){
+        fscanf(fptr, "%d %d\n", &id1, &id2);
         printf("%d %d\n", id1, id2);
         fprintf(output, "%d -- %d;\n", id1, id2);
     }

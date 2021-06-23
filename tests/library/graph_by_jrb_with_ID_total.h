@@ -4,6 +4,8 @@
 #include <string.h>
 #include <stdlib.h>
 #define INFINITIVE_VALUE 10000
+#define true 1
+#define false 0
 
 typedef struct 
 {
@@ -176,7 +178,20 @@ int outdegree(Graph graph, int v, int *output){   // tim bac ra cua dinh
     return total;
     
 } 
+//HÀM KIỂM TRA XEM CÓ TỒN TẠI CẠNH TRONG ĐỒ THỊ HAY KHÔNG
 
+
+int hasEdge(Graph graph, int v1, int v2)
+{
+    JRB node = jrb_find_int(graph.edges, v1);
+    if (node == NULL)
+        return 0;
+    JRB tree = (JRB)jval_v(node->val);
+    if (jrb_find_int(tree, v2) == NULL)
+        return 0;
+    else
+        return 1;
+}
 
 // GIAI PHONG BO NHO 
 void dropGraph(Graph graph){
@@ -189,31 +204,57 @@ void dropGraph(Graph graph){
     jrb_free_tree(graph.edges);
     jrb_free_tree(graph.verticles);
 }
-// KIEM TRA XEM DO THI CO CHU TRINH HAY KO ( DAG LA KO CO CHU TRINH )
-int DFS_DAG(Graph graph, int start){
+// KIEM TRA XEM DO THI CO DAG HAY KO ( DAG LA KO CO CHU TRINH )
+//Do thi khong co chu trinh va co huong
+int DFS_DAG(Graph graph, int start)
+{
     int visited[1000] = {};
-    int n, output[100], i, u , v;
+    int output[100];
     Dllist node, stack;
+
     stack = new_dllist();
     dll_append(stack, new_jval_i(start));
-    while(! dll_empty(stack)){
+
+    while (!dll_empty(stack))
+    {
         node = dll_last(stack);
-        u = jval_i(node->val);
+        int u = jval_i(node->val);
         dll_delete_node(node);
-        if(!visited[u]){
-            //PrintVertex(u);
-            visited[u] =  1;
-    
-            n = outdegree(graph, u, output);
-            for(i =0; i < n ; i++){
-                v = output[i];
-                if(v == start) return 0; //cycle deleted
-                if(!visited[v]) dll_append(stack, new_jval_i(v));
+
+        if (!visited[u])
+        {
+            visited[u] = 1;
+            int n = outdegree(graph, u, output);
+            for (int i = 0; i < n; i++)
+            {
+                int v = output[i];
+                if (v == start)
+                    return 0;
+                if (!visited[v])
+                    dll_append(stack, new_jval_i(v));
             }
         }
     }
     return 1;
 }
+
+int DAG(Graph graph) // Khong cho chu trinh return 1
+{
+    int start, notCycles;
+    JRB node;
+
+    jrb_traverse(node, graph.verticles)
+    {
+        start = jval_i(node->key);
+        // printf("Goi DFS xuat phat tu dinh %d\n", start);
+        notCycles = DFS_DAG(graph, start);
+        if (notCycles == 0)
+            return 0;
+    }
+    return 1;
+}
+
+
 //HÀM KIỂM TRA XEM ĐỒ THỊ VÔ HƯỚNG CÓ CHU TRÌNH HAY KHÔNG
 int DFS_Cycle(Graph graph, int start){
     int visited[1000] = {};
@@ -250,41 +291,7 @@ int DFS_Cycle(Graph graph, int start){
 }
 
 
-int DFS_DAG_WD(Graph graph, int start){
-    int visited[1000] = {};
-    int n, output[100], i, u , v;
-    Dllist node, stack;
-    stack = new_dllist();
-    dll_append(stack, new_jval_i(start));
-    while(! dll_empty(stack)){
-        node = dll_last(stack);
-        u = jval_i(node->val);
-        dll_delete_node(node);
-        if(!visited[u]){
-            //PrintVertex(u);
-            visited[u] =  1;
-    
-            n = outdegree(graph, u, output);
-            for(i =0; i < n ; i++){
-                v = output[i];
-                if(v == start && getEdgeValue(graph, v, u)!= INFINITIVE_VALUE) return 0; //cycle deleted
-                if(!visited[v]) dll_append(stack, new_jval_i(v));
-            }
-        }
-    }
-    return 1;
-}
-int DAG(Graph graph){
-    int start, notCycle;
-    JRB vertex;
-    jrb_traverse(vertex, graph.verticles){ // duyet  qua từng đỉnh của đồ thị
-        start = jval_i(vertex->key);
-        printf("goi DFS xuat phat tu dinh  %d \n", start);
-        notCycle =  DFS_DAG(graph, start);
-        if(notCycle == 0) return 0; // do thi ko phai là DAG; detect cycle
-    
-    }return 1; // do thi la DAG, no cycle
-}
+
 
 
 int count;
@@ -466,10 +473,25 @@ int TO_Mau(Graph g, int n, int* m, int start){ //Xu ly de cho ra ket qua vao man
         }
     return so_mau;
 }
-
+void printToGraphViz(Graph g, int verte_num, int ed_num){
+    FILE* output = fopen("output.dot", "w+");
+    fprintf(output, "graph dothi\n {");
+    for(int i = 0; i< verte_num; i++){
+        for(int j = i+1; j< verte_num; j++){
+            if(hasEdge(g, i, j) == 1)
+            fprintf(output, "%d -- %d;\n", i, j);
+        }
+    }
+    fprintf(output, "}");
+    fclose(output);
+}
 //BFS
-void BFS_Shortest_Path(Graph graph,int start, int stop, int*truoc){
-    int visited[1000] = {};
+int BFS_Shortest_Path(Graph graph,int start, int stop, int*truoc){
+//int find[1000];
+// if(shortestPath_s_To_t(graph , start, stop ,find) == INFINITIVE_VALUE){
+//     return 0; // ko co duong di
+// }
+int visited[1000] = {};
 int n, output[100], i, u, v;
 Dllist node, queue;
 queue = new_dllist();
@@ -482,7 +504,7 @@ dll_delete_node(node);
 if (!visited[u]) //nếu u chưa được thăm
 {
 visited[u] = 1;
-if ( u == stop ) return; //đỉnh u = stop  kết thúc BFS
+if ( u == stop ) return 1; //đỉnh u = stop  kết thúc BFS
 n = indegree(graph, u, output);
 for (i=0; i<n; i++) //xét lần lượt các đỉnh kề với đỉnh u
 {
@@ -494,6 +516,7 @@ dll_append(queue, new_jval_i(v)); //thêm v vào queue nếu v chưa được th
 }
 }
 }
+return 1;
 }
 
 void PrintVertex( int v){
@@ -557,12 +580,69 @@ int visited[1000] = {};
     }
     return ;
 }
+//DFS LƯU GIỮ PATH
+void swapArray(int arr[], int cnt)
+{
+    for (int i = 0; i < cnt / 2; i++)
+    {
+        int c = arr[i];
+        arr[i] = arr[cnt - i - 1];
+        arr[cnt - i - 1] = c;
+    }
+}
+int DFS_PATH(Graph graph, int start, int stop, int *path)
+{
+    int visited[1000] = {};
+    int output[100];
+    int cnt = 0, u;
+    int save[1000];
+    Dllist stack = new_dllist();
 
+    dll_append(stack, new_jval_i(start));
+
+    while (!dll_empty(stack))
+    {
+        Dllist node = dll_last(stack);
+        u = jval_i(node->val);
+        dll_delete_node(node);
+
+        if (!visited[u])
+        {
+            visited[u] = 1;
+            if (u == stop)
+                break;
+            int n = outdegree(graph, u, output);
+            for (int i = 0; i < n; i++)
+            {
+                int v = output[i];
+                if (!visited[v])
+                {
+                    save[v] = u;
+                    dll_append(stack, new_jval_i(v));
+                }
+            }
+        }
+    }
+    if (u != stop)
+        return 0;
+    else
+    {
+        int i = stop;
+        path[cnt++] = i;
+        while (i != start)
+        {
+            i = save[i];
+            path[cnt++] = i;
+        }
+        swapArray(path, cnt);
+    }
+    return cnt;
+}
 //FATHER CODE
 void FatherCode(Graph g, int n, int *code){
     int out[n]; int tmp;
     int output[n];
-    for(int i = 1; i < n; i++){
+    for(int i = 0; i < n; i++){
         int m = outdegree(g, i, output);
         double min = n;
         
@@ -582,15 +662,7 @@ void FatherCode(Graph g, int n, int *code){
 
 
 //SAP XEP TOPO
-void swapArray(int arr[], int cnt)
-{
-    for (int i = 0; i < cnt / 2; i++)
-    {
-        int c = arr[i];
-        arr[i] = arr[cnt - i - 1];
-        arr[cnt - i - 1] = c;
-    }
-}
+
 
 int topologicalSort(Graph graph, int *output)
 {
@@ -742,32 +814,50 @@ double Kruskal(Graph g, int verte_num, Graph out, int start){
     }
     return distance;
 }
+//THUAT TOAN DEM SO THANH PHAN LIEN THONG MANH
 
-// TOPO SORT
+int check_lienthongmach(Graph graph)
+{
+   JRB node;
+   int bool = true;
+   int check = 0;
 
-// void Topo_Sort(Graph g, int start, int *list, int ver_num){
-//     Graph tmp = g; int count = 0;
-//     int *S = (int*)calloc(ver_num, sizeof(int)); int sumS = 0;
-//     int output[ver_num], op[ver_num];
-//     for(int i = 1; i <= ver_num; i++){
-//         if(indegree(g, i, output) == 0 && jrb_find_int(g.verticles, i) != 0){
-//             S[i] = i;
-//             sumS += i;
-//         }
-//     }
-//     while(sumS != 0){
-//         for(int i = 1; i<= ver_num; i++){
-//             if(S[i]!= 0){
-//                 S[i] = 0; sumS -= i; 
-//                 list[count] = i; count++; 
-//                 int n = outdegree(g, i, output);
-//                 for(int j =0; j< n; j++){
-//                     addEdge(tmp, i + 99, output[j], 0);
-//                     }
-                    
-//                 }
-//                 printf("%10d", indegree1(tmp, i, op ));
-//             }
-//         }
-//     }
 
+   jrb_traverse(node, graph.verticles)
+   {
+      JRB node_temp;
+
+      // printf("%d ",jval_i(node->key));
+
+      jrb_traverse(node_temp, graph.verticles)
+      {
+         if (jval_i(node->key) != jval_i(node_temp->key))
+         {
+            int out[INFINITIVE_VALUE] = {};
+            int  v1 = jval_i(node->key);
+            int v2 = jval_i(node_temp->key);
+            // printf("%d %d\n",v1, v2);
+
+            int check = DFS_PATH(graph, v1, v2, out);
+            
+            if (check < 2)
+            {
+               bool = false;
+               break;
+            }
+         }
+      }
+
+      if (bool == false)
+      {
+         break;
+      }
+   }
+   return bool;
+}
+//    int bool = check_lienthongmach(graph_1);
+
+//    if (bool == true)
+//    {
+//       printf("Thành phần liên thông mạch!!\n");
+//    } else printf("Thành phần không liên thông mạch!!\n");

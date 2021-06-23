@@ -1,6 +1,6 @@
-//#include "libfdr/cgraph_datatype.h"
+#include "library/cgraph_datatype.h"
 
-#include "graph_by_jrb_with_ID_total.h"
+//#include "library/graph_by_jrb_with_ID_total.h"
 // int BFS_count_deg(Graph graph, int start, int stop,  vertex *list){
 // int max = 0;   
 // int visited[1000] = {};
@@ -40,8 +40,8 @@ void import_edges(Graph g, int ed_num, FILE* fptr){
     int v1, v2;
     for(int i = 0; i < ed_num; i++){
         fscanf(fptr,"%d %d\n", &v1, &v2);
-        addEdge(g, v1, v2, 1);
-        addEdge(g, v2, v1, 1);
+        addEdge(g, v1, v2);
+        addEdge(g, v2, v1);
     }
 }
 
@@ -70,30 +70,35 @@ void import_edges(Graph g, int ed_num, FILE* fptr){
 void In_ra_man_hinh(int n, int so_mau, int *m){ //In ket qua ra man hinh
     for(int i = 1;i <= so_mau; i++){
         printf("\nMau %d : ___", i );
-        for(int j=1;j<=n;j++) if(m[j]==i) printf("%d\t",j);
+        for(int j=0;j<=n;j++) if(m[j]==i) printf("%d\t",j);
        
     }
     
 }
 int main(){
     int ver_num, ed_num;
-    int max_deg;
-    int i; int so_mau;
-    FILE *fptr = fopen("../tomau.txt", "r"); 
-    fscanf(fptr,"%d %d\n", &ver_num, &ed_num);
+    // int max_deg;
+    // int i; 
+    int so_mau;
+    // FILE *fptr = fopen("../tomau.txt", "r"); 
+    // fscanf(fptr,"%d %d\n", &ver_num, &ed_num);
     int m[100];
-    Graph g = createGraph(ver_num+1);
-    import_edges(g, ed_num, fptr);
-    //max_deg = BFS_count_deg(g, 1, -1, list);
-    //printf("%d\n", max_deg);
-    // for(i = 0; i< ver_num; i++){
-    //     if(list[i].deg == max_deg - 1) break;
-        
-    // }
-    // BFS_count_deg(g, list[i].dinh, -1, list);
-    so_mau = TO_Mau(g, ver_num, m, 1);
+    // Graph g = createGraph(ver_num+1);
+    // import_edges(g, ed_num, fptr);
+    FILE* fptr = fopen("../testcasetomau.txt","r");
+    //int n, m;
+    int id1, id2; 
+    double weight;
+    fscanf(fptr, "%d %d\n", &ver_num, &ed_num);
+    Graph g = createGraph(ver_num);
+    //Graph out = createGraph();
+    for(int i = 0; i< ed_num; i++){
+        fscanf(fptr, "%d %d %lf\n", &id1, &id2, &weight);
+        addEdge(g, id1, id2);
+    }
+    fclose(fptr);
+    so_mau = TO_Mau(g, ver_num, m, 0);
     In_ra_man_hinh(ver_num, so_mau, m);
-    DAG(g);
 
 
 }

@@ -44,7 +44,9 @@ int main(){
     }
     printf("\n");
     printf("BFS_Shortest :\n");
-    BFS_Shortest_Path(g, s, t, previous);
+    int check = BFS_Shortest_Path(g, s, t, previous);
+    if(check == 0) printf("Khong ton tai duong di tu %d den %d\n", s, t);
+    else {
     i = t;
     do{
            printf("%d <== ", i);    //v3 
@@ -53,6 +55,7 @@ int main(){
         while(i != s);
         printf("%d", s);
     printf("\n");
+    }
     //getComponents(g, n);
     // }
     fclose(fptr);

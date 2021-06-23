@@ -382,3 +382,23 @@ int Kruskal(Graph g, int verte_num, Graph out, int start){
     }
     return distance;
 }
+int TO_Mau(Graph g, int n, int *m, int start){ //Xu ly de cho ra ket qua vao mang m[]
+    int kt;
+    int so_mau = 0;
+    for(int i = start;i <n ;i++)
+        if(!m[i]) {
+            so_mau++; //Dem so mau
+            m[i] =so_mau;
+            for(int j = i+1; j<n ; j++) //Kiem tra xem nhung dinh nao co the gan bang mau sm nua khong
+                if((g.matrix[i* g.n + j] == 0)&&(m[j] == 0)){
+                    kt=1;
+                    for(int k = i+1; k < j; k++)
+                        if((g.matrix[k* g.n + j] == 1)&&(m[i]==m[k])){
+                            kt=0;
+                            break;
+                        }
+                    if(kt==1) m[j] = so_mau;
+                }                   
+        }
+    return so_mau;
+}

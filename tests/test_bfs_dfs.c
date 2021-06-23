@@ -17,9 +17,9 @@ int main(){
     fclose(fptr);
     int output[n];
     printf("DFS :\n");
-    DFS(g, 0, -1, PrintVertex);
+    DFS(g, 1, -1, PrintVertex);
     printf("\nBFS :\n");
-    BFS(g, 0, -1, PrintVertex);
+    BFS(g, 1, -1, PrintVertex);
     // printf("%d", getNumOfV(a));
     // getComponents(a, 7);
     // dropGraph(a);
