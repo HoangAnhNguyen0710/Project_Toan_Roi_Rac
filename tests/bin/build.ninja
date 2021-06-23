@@ -34,7 +34,7 @@ include rules.ninja
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin && /usr/bin/cmake -S/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests -B/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin
+  COMMAND = cd /home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests/bin && /usr/bin/cmake -S/home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests -B/home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests/bin
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -46,7 +46,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests/bin && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -271,7 +271,7 @@ build test1: C_EXECUTABLE_LINKER__test1 CMakeFiles/test1.dir/testprufercode.o | 
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# /home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/CMakeLists.txt
+# /home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests/CMakeLists.txt
 # =============================================================================
 
 
@@ -279,7 +279,7 @@ build test1: C_EXECUTABLE_LINKER__test1 CMakeFiles/test1.dir/testprufercode.o | 
 # Utility command for rebuild_cache
 
 build library/libfdr/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/library/libfdr && /usr/bin/cmake -S/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests -B/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin
+  COMMAND = cd /home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests/bin/library/libfdr && /usr/bin/cmake -S/home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests -B/home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests/bin
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -291,7 +291,7 @@ build library/libfdr/rebuild_cache: phony library/libfdr/CMakeFiles/rebuild_cach
 # Utility command for edit_cache
 
 build library/libfdr/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/library/libfdr && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests/bin/library/libfdr && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -358,14 +358,14 @@ build libfdr.a: phony library/libfdr/libfdr.a
 # =============================================================================
 
 #############################################
-# Folder: /home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin
+# Folder: /home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests/bin
 
 build all: phony test7 test6 test5 test4 test3 test2 test1 library/libfdr/all
 
 # =============================================================================
 
 #############################################
-# Folder: /home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/library/libfdr
+# Folder: /home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests/bin/library/libfdr
 
 build library/libfdr/all: phony library/libfdr/libfdr.a
 

@@ -1,4 +1,4 @@
-# Install script for directory: /home/hoanh/Desktop/project_Toán_Rời_Rạc/tests
+# Install script for directory: /home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/library/libfdr/cmake_install.cmake")
+  include("/home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests/bin/library/libfdr/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests/bin/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

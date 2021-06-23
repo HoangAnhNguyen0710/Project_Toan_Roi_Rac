@@ -372,7 +372,7 @@ void BFS_Connected(Graph g, int start, int* id, int lt){
     }
 }
 
-//DEM SO THANH PHAN LIEN THONG CUA DO THI
+//HAM DEM SO THANH PHAN LIEN THONG CUA DO THI
 int getComponents(Graph g, int ver_num){
     int lt = 0;
     int id[1000];
@@ -415,36 +415,36 @@ return 0;
 else return 1;
 }
 
-//HAM TIM SO THANH PHAN LIEN THONG CUA DO THI
-int count_Connected_Component(Graph g, int ver_num) { // dem so thanh phan lien thong
-    int mark[ver_num + 1];
 
-    int succes;
-    int count = 0, i,j, Connected_Comp_Num = 0;
-    for( i = 0; i< ver_num; i++) //khoi tao cac dinh chua danh dau
-        mark[i] = 0;
-        do {
-           j = 0;
-           while(mark[j]==1) //tim 1 dinh chua duoc danh dau
-           j++;
-           mark[j] = 1; //danh dau dinh tim duoc
-           count++; //tang so dinh danh dau len 1
-           Connected_Comp_Num ++; //tang so thanh phan lien thong len 1
-          do {
-              succes = 0;
-              for(i = 0; i < ver_num; i++)
-                 if(mark[i]==1)
-                    for(j = 0; j < ver_num; j++)
-                          if (mark[j] == 0 && getEdgeValue(g, i, j) != INFINITIVE_VALUE) {
-                               mark[j] = 1;
-                               succes =1;
-                               count ++;
-                               if(count == ver_num) return Connected_Comp_Num;
-                           }
-             }while (succes == 1);
-         } while(count < ver_num); //lap lai khi con dinh chua duoc danh dau
-    return Connected_Comp_Num;
-}
+// int count_Connected_Component(Graph g, int ver_num) { // dem so thanh phan lien thong
+//     int mark[ver_num + 1];
+
+//     int succes;
+//     int count = 0, i,j, Connected_Comp_Num = 0;
+//     for( i = 0; i< ver_num; i++) //khoi tao cac dinh chua danh dau
+//         mark[i] = 0;
+//         do {
+//            j = 0;
+//            while(mark[j]==1) //tim 1 dinh chua duoc danh dau
+//            j++;
+//            mark[j] = 1; //danh dau dinh tim duoc
+//            count++; //tang so dinh danh dau len 1
+//            Connected_Comp_Num ++; //tang so thanh phan lien thong len 1
+//           do {
+//               succes = 0;
+//               for(i = 0; i < ver_num; i++)
+//                  if(mark[i]==1)
+//                     for(j = 0; j < ver_num; j++)
+//                           if (mark[j] == 0 && getEdgeValue(g, i, j) != INFINITIVE_VALUE) {
+//                                mark[j] = 1;
+//                                succes =1;
+//                                count ++;
+//                                if(count == ver_num) return Connected_Comp_Num;
+//                            }
+//              }while (succes == 1);
+//          } while(count < ver_num); //lap lai khi con dinh chua duoc danh dau
+//     return Connected_Comp_Num;
+// }
 // THUAT TOAN TO MAU DO THI
 int TO_Mau(Graph g, int n, int* m, int start){ //Xu ly de cho ra ket qua vao mang m[]  
     int kt;

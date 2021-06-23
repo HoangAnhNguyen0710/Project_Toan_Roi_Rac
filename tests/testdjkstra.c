@@ -2,7 +2,7 @@
 
 
 int main(){
-    FILE* fptr = fopen("../testcase2.txt","r"); if(fptr == NULL) return 0;
+    FILE* fptr = fopen("../testcase3.txt","r"); if(fptr == NULL) return 0;
     int n, m;
     int id1, id2;
     double weight;
@@ -25,6 +25,7 @@ int main(){
     printf("Nhap diem dau va diem cuoi :\n"); scanf("%d %d", &s, &t);
     // scanf("%d ", &s);
     // scanf("%d ", &t);
+    printf("Dijkstra :\n");
     w = shortestPath_s_To_t(g, s, t, previous);
     if(w == INFINITIVE_VALUE) printf("Khong ton tai duong di tu %d den %d\n", s, t);
     else {
@@ -41,6 +42,16 @@ int main(){
         //     printf("%s --", getVertex(g, previous[i]));
         // }
     }
+    printf("\n");
+    printf("BFS_Shortest :\n");
+    BFS_Shortest_Path(g, s, t, previous);
+    i = t;
+    do{
+           printf("%d <== ", i);    //v3 
+            i = previous[i];                       
+        }
+        while(i != s);
+        printf("%d", s);
     printf("\n");
     //getComponents(g, n);
     // }

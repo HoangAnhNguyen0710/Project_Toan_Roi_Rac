@@ -1,4 +1,4 @@
-# Install script for directory: /home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/library/libfdr
+# Install script for directory: /home/hoanh/Desktop/project_Toán_Rời_Rạc/Project_Toan_Roi_Rac/tests/library/libfdr
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

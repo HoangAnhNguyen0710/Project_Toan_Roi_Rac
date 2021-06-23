@@ -2,7 +2,7 @@
 
 
 int main(){
-    FILE* fptr = fopen("../testcase2.txt","r"); if(fptr == NULL) return 0;
+    FILE* fptr = fopen("../testcase3.txt","r"); if(fptr == NULL) return 0;
     int n, m;
     int id1, id2;
     double weight;
