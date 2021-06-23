@@ -2,7 +2,7 @@
 
 
 int main(){
-    FILE* fptr = fopen("../testcase3.txt","r"); if(fptr == NULL) return 0;
+    FILE* fptr = fopen("../testcase.txt","r"); if(fptr == NULL) return 0;
     int n, m;
     int id1, id2;
     double weight;
@@ -24,13 +24,18 @@ int main(){
     else printf("\nDo thi testcase3 la DAG");
 
     int bool = check_lienthongmach(g);
-
+    
     if (bool == true)
     {
       printf("\nThành phần liên thông mạch!!\n");
     } else printf("\nThành phần không liên thông mạch!!\n");
     //printf("Cay bao trum co trong so la : %.0lf\n", Kruskal(g , n, out, 0));
-    
+    int output[n];
+    int num = topologicalSort(g, output);
+   // printf("%d\n", n);
+    for(int i = 0; i< num; i++){
+        printf("%4d", output[i]);
+    }
     fclose(fptr);
 
     

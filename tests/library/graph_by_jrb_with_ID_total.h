@@ -698,7 +698,7 @@ int topologicalSort(Graph graph, int *output)
         }
     }
     
-    swapArray(output, total);
+    //swapArray(output, total);
     return total;
 }
 //THUAT TOAN PRIM TIM CAY BAO TRUM NHO NHAT 
