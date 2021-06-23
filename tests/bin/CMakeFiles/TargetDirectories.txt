@@ -1,0 +1,12 @@
+/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/CMakeFiles/rebuild_cache.dir
+/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/CMakeFiles/edit_cache.dir
+/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/CMakeFiles/test7.dir
+/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/CMakeFiles/test6.dir
+/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/CMakeFiles/test5.dir
+/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/CMakeFiles/test4.dir
+/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/CMakeFiles/test3.dir
+/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/CMakeFiles/test2.dir
+/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/CMakeFiles/test1.dir
+/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/library/libfdr/CMakeFiles/rebuild_cache.dir
+/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/library/libfdr/CMakeFiles/edit_cache.dir
+/home/hoanh/Desktop/project_Toán_Rời_Rạc/tests/bin/library/libfdr/CMakeFiles/fdr.dir
